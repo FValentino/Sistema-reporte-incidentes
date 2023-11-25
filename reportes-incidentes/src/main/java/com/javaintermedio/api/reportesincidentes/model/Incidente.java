@@ -33,8 +33,8 @@ public class Incidente {
         this.idIncidente = idIncidente;
         this.tipoProblema = tipoProblema;
         this.descripcionProblema = descripcionProblema;
-        this.fechaRegistro = fechaRegistro;
-        this.fechaSolucion = fechaSolucion;
+        this.fechaRegistro = LocalDate.now();
+        this.fechaSolucion = LocalDate.now().plusDays(7L);
         this.estado = estado;
     }
 
