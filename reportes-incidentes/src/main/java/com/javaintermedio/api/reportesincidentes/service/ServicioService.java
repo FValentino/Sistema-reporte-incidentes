@@ -1,13 +1,13 @@
 package com.javaintermedio.api.reportesincidentes.service;
 
-import com.javaintermedio.api.reportesincidentes.model.Incidente;
 import com.javaintermedio.api.reportesincidentes.model.Servicio;
-import com.javaintermedio.api.reportesincidentes.repository.IncidenteRepository;
 import com.javaintermedio.api.reportesincidentes.repository.ServicioRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service 
 public class ServicioService {
     
     @Autowired
