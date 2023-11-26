@@ -14,23 +14,30 @@ public class EmpleadoRecursosHumanosService {
     private EmpleadoRecursosHumanosRepository empleadoRecursosHumanosRepo;
     
     //Crud basico
-    public void agregarCliente(EmpleadoRecursosHumanos empleado){
+    public void agregarEmpleadoRecursosHumanos(EmpleadoRecursosHumanos empleado){
         empleadoRecursosHumanosRepo.save(empleado);
     }
     
-    public void eliminarCliente(int cuit){
-        empleadoRecursosHumanosRepo.deleteById(cuit);
+    public void eliminarEmpleadoRecursosHumanos(long id){
+        empleadoRecursosHumanosRepo.deleteById(id);
     }
     
-    public Optional<EmpleadoRecursosHumanos> buscarCliente(int cuit){
-        return empleadoRecursosHumanosRepo.findById(cuit);
+    public Optional<EmpleadoRecursosHumanos> buscarEmpleadoRecursosHumanos(long id){
+        return empleadoRecursosHumanosRepo.findById(id);
     }
     
     public List <EmpleadoRecursosHumanos> mostrarTodos(){
         return empleadoRecursosHumanosRepo.findAll();
     }
     
-    public void modificarEmpleado(EmpleadoRecursosHumanos empleado){
+    public void modificarEmpleadoRecursosHumanos(long id, EmpleadoRecursosHumanos empleado){
+        
+        EmpleadoRecursosHumanos empleadoAux = this.empleadoRecursosHumanosRepo.findById(id).orElse(empleado);
+        
+        empleadoAux.setDni(empleado.getDni());
+        empleadoAux.setNombre(empleado.getNombre());
+        empleadoAux.setEmail(empleado.getEmail());
+        empleadoAux.setTelefono(empleado.getTelefono());
         
         empleadoRecursosHumanosRepo.save(empleado);
     }

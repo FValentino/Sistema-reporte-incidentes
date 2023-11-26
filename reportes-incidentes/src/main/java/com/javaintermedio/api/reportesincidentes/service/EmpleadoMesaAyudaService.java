@@ -14,23 +14,29 @@ public class EmpleadoMesaAyudaService {
     private EmpleadoMesaAyudaRepository empleadoMesaAyudaRepo;
     
     //Crud basico
-    public void agregarCliente(EmpleadoMesaAyuda empleado){
+    public void agregarEmpleadoMesaAyuda(EmpleadoMesaAyuda empleado){
         empleadoMesaAyudaRepo.save(empleado);
     }
     
-    public void eliminarCliente(int cuit){
-        empleadoMesaAyudaRepo.deleteById(cuit);
+    public void eliminarEmpleadoMesaAyuda(long id){
+        empleadoMesaAyudaRepo.deleteById(id);
     }
     
-    public Optional<EmpleadoMesaAyuda> buscarCliente(int cuit){
-        return empleadoMesaAyudaRepo.findById(cuit);
+    public Optional<EmpleadoMesaAyuda> buscarEmpleadoMesaAyuda(long id){
+        return empleadoMesaAyudaRepo.findById(id);
     }
     
     public List <EmpleadoMesaAyuda> mostrarTodos(){
         return empleadoMesaAyudaRepo.findAll();
     }
     
-    public void modificarEmpleado(EmpleadoMesaAyuda empleado){
+    public void modificarEmpleadoMesaAyuda(long id, EmpleadoMesaAyuda empleado){
+        EmpleadoMesaAyuda empleadoAux = this.empleadoMesaAyudaRepo.findById(id).orElse(empleado);
+        
+        empleadoAux.setDni(empleado.getDni());
+        empleadoAux.setNombre(empleado.getNombre());
+        empleadoAux.setEmail(empleado.getEmail());
+        empleadoAux.setTelefono(empleado.getTelefono());
         
         empleadoMesaAyudaRepo.save(empleado);
     }

@@ -18,20 +18,26 @@ public class ClienteService {
         clienteRepo.save(cliente);
     }
     
-    public void eliminarCliente(int cuit){
-        clienteRepo.deleteById(cuit);
+    public void eliminarCliente(long id){
+        clienteRepo.deleteById(id);
     }
     
-    public Optional<Cliente> buscarCliente(int cuit){
-        return clienteRepo.findById(cuit);
+    public Optional<Cliente> buscarCliente(long id){
+        return clienteRepo.findById(id);
     }
     
     public List <Cliente> mostrarTodos(){
         return clienteRepo.findAll();
     }
     
-    public void modificarCliente(Cliente cliente){
+    public void modificarCliente(long id, Cliente cliente){
         
-        clienteRepo.save(cliente);
+        Cliente cli = this.clienteRepo.findById(id).orElse(cliente);
+        cli.setCuit(cliente.getCuit());
+        cli.setRazonSocial(cliente.getRazonSocial());
+        cli.setTelefono(cliente.getTelefono());
+        cli.setDireccion(cliente.getDireccion());
+        
+        clienteRepo.save(cli);
     }
 }

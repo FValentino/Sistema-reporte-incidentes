@@ -14,24 +14,31 @@ public class EmpleadoComercialService {
     private EmpleadoComercialRepository empleadoComercialRepo;
     
     //Crud basico
-    public void agregarCliente(EmpleadoComercial empleado){
+    public void agregarEmpleadoComercial(EmpleadoComercial empleado){
         empleadoComercialRepo.save(empleado);
     }
     
-    public void eliminarCliente(int cuit){
-        empleadoComercialRepo.deleteById(cuit);
+    public void eliminarEmpleadoComercial(long id){
+        empleadoComercialRepo.deleteById(id);
     }
     
-    public Optional<EmpleadoComercial> buscarCliente(int cuit){
-        return empleadoComercialRepo.findById(cuit);
+    public Optional<EmpleadoComercial> buscarEmpleadoComercial(long id){
+        return empleadoComercialRepo.findById(id);
     }
     
     public List <EmpleadoComercial> mostrarTodos(){
         return empleadoComercialRepo.findAll();
     }
     
-    public void modificarEmpleado(EmpleadoComercial empleado){
+    public void modificarEmpleadoComercial(long id, EmpleadoComercial empleado){
         
-        empleadoComercialRepo.save(empleado);
+        EmpleadoComercial empleadoAux = this.empleadoComercialRepo.findById(id).orElse(empleado);
+        
+        empleadoAux.setDni(empleado.getDni());
+        empleadoAux.setNombre(empleado.getNombre());
+        empleadoAux.setEmail(empleado.getEmail());
+        empleadoAux.setTelefono(empleado.getTelefono());
+        
+        this.empleadoComercialRepo.save(empleado);
     }
 }

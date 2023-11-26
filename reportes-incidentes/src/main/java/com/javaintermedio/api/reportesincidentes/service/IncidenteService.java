@@ -30,7 +30,12 @@ public class IncidenteService {
         return incidenteRepo.findAll();
     }
     
-    public void modificarIncidente(Incidente incidente){
+    public void modificarIncidente(long id, Incidente incidente){
+        Incidente incidenteAux = this.incidenteRepo.findById(id).orElse(incidente);
+        
+        incidenteAux.setTipoProblema(incidente.getTipoProblema());
+        incidenteAux.setDescripcionProblema(incidente.getDescripcionProblema());
+        incidenteAux.setEstado(incidente.getEstado());
         
         incidenteRepo.save(incidente);
     }

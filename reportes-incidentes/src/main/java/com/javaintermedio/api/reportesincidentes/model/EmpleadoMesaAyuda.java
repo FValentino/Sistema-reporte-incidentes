@@ -2,6 +2,8 @@ package com.javaintermedio.api.reportesincidentes.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +14,9 @@ import lombok.Setter;
 public class EmpleadoMesaAyuda{
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id_empleado", nullable=false)
+    private long id;
     @Column(name="dni", nullable=false, length = 8)
     private int dni;
     @Column(name="nombre", nullable=false, length = 50)
@@ -20,7 +25,8 @@ public class EmpleadoMesaAyuda{
     private String email;
     private String telefono;
 
-    public EmpleadoMesaAyuda(int dni, String nombre, String email, String telefono) {
+    public EmpleadoMesaAyuda(long id, int dni, String nombre, String email, String telefono) {
+        this.id = id;
         this.dni = dni;
         this.nombre = nombre;
         this.email = email;
