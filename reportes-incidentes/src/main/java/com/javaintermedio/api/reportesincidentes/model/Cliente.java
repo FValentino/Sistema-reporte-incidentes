@@ -25,13 +25,16 @@ public class Cliente {
     private String telefono;
     @Column(name = "direccion", nullable=false, length = 70)
     private String direccion;
+    @Column (name = "id_sericio", nullable = false)
+    private long idServicio;
 
-    public Cliente(long idCliente, int cuit, String razonSocial, String telefono, String direccion) {
+    public Cliente(long idCliente, int cuit, String razonSocial, String telefono, String direccion, long idServicio) {
         this.idCliente = idCliente;
         this.cuit = cuit;
         this.razonSocial = razonSocial;
         this.telefono = telefono;
         this.direccion = direccion;
+        this.idServicio = idServicio;
     }
 
     public Cliente() {

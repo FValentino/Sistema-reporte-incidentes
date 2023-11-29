@@ -1,17 +1,22 @@
 package com.javaintermedio.api.reportesincidentes.service;
 
 import com.javaintermedio.api.reportesincidentes.model.Incidente;
+import com.javaintermedio.api.reportesincidentes.model.IncidenteResuelto;
 import com.javaintermedio.api.reportesincidentes.repository.IncidenteRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.Objects;
 
 @Service 
 public class IncidenteService {
     
     @Autowired
     private IncidenteRepository incidenteRepo;
+    
+    @Autowired
+    private IncidentesResueltosService incidenteResueltoService;
     
     //Crud basico
     public void agregarIncidente(Incidente incidente){
@@ -31,12 +36,30 @@ public class IncidenteService {
     }
     
     public void modificarIncidente(long id, Incidente incidente){
-        Incidente incidenteAux = this.incidenteRepo.findById(id).orElse(incidente);
         
-        incidenteAux.setTipoProblema(incidente.getTipoProblema());
-        incidenteAux.setDescripcionProblema(incidente.getDescripcionProblema());
-        incidenteAux.setEstado(incidente.getEstado());
-        
-        incidenteRepo.save(incidente);
+        if (Objects.nonNull(incidente.getFechaSolucion())){
+            IncidenteResuelto incidenteResuelto = new IncidenteResuelto();
+            
+            incidenteResuelto.setTipoProblema(incidente.getTipoProblema());
+            incidenteResuelto.setDescripcionProblema(incidente.getDescripcionProblema());
+            incidenteResuelto.setIdTecnico(incidente.getIdTecnico());
+            incidenteResuelto.setFechaRegistro(incidente.getFechaRegistro());
+            incidenteResuelto.setFechaEstimadaSolucion(incidente.getFechaEstimadaSolucion());
+            incidenteResuelto.setFechaSolucion(incidente.getFechaSolucion());
+            
+            this.incidenteRepo.deleteById(id);
+            this.incidenteResueltoService.agregarIncidente(incidenteResuelto);
+        }
+        else{
+            Incidente incidenteAux = this.incidenteRepo.findById(id).orElse(null);
+            
+            incidenteAux.setTipoProblema(incidente.getTipoProblema());
+            incidenteAux.setDescripcionProblema(incidente.getDescripcionProblema());
+            incidenteAux.setIdTecnico(incidente.getIdTecnico());
+            incidenteAux.setFechaRegistro(incidente.getFechaRegistro());
+            incidenteAux.setFechaEstimadaSolucion(incidente.getFechaEstimadaSolucion());
+            
+            this.incidenteRepo.save(incidenteAux);
+        }
     }
 }

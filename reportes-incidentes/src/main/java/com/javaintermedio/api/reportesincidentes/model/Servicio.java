@@ -5,7 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import java.time.LocalDate;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,20 +14,14 @@ public class Servicio {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_incidente", nullable = false)
-    private long idIncidente;
+    @Column(name = "id_servicio", nullable = false)
+    private long idServicio;
     @Column(name = "tipo_problema", nullable = false, length = 50)
-    private String tipoProblema;
-    @Column(name = "descripcion_problema", nullable = false, length = 150)
-    private String descripcionProblema;
-    @Column(name = "fecha_contratacion", nullable = false, length = 12)
-    private LocalDate fechaContratacion;
+    private String nombre;
 
-    public Servicio(long idIncidente, String tipoProblema, String descripcionProblema, LocalDate fechaContratacion) {
-        this.idIncidente = idIncidente;
-        this.tipoProblema = tipoProblema;
-        this.descripcionProblema = descripcionProblema;
-        this.fechaContratacion = fechaContratacion;
+    public Servicio(long idServicio, String nombre) {
+        this.idServicio = idServicio;
+        this.nombre = nombre;
     }
 
     public Servicio() {

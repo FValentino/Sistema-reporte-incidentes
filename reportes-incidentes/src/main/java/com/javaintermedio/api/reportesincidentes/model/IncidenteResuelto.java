@@ -8,14 +8,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import java.time.*;
-import java.time.format.DateTimeFormatter;
 import lombok.Getter;
 import lombok.Setter;
 
 
 @Entity
 @Getter @Setter
-public class Incidente {
+public class IncidenteResuelto {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,18 +26,17 @@ public class Incidente {
     private String descripcionProblema;
     @Column(name = "id_tecnico", nullable = false)
     private long idTecnico;
-    @Column(name = "fecha_registro", nullable=false, updatable=false)
+    @Column(name = "fecha_registro", updatable=false ,nullable = false, length = 10)
     @Temporal(TemporalType.DATE)
-    private String fechaRegistro = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+    private String fechaRegistro;
     @Column(name = "fecha_estimada_solucion", nullable = false, length = 10)
     @Temporal (TemporalType.DATE)
     private String fechaEstimadaSolucion;
     @Column (name = "fecha_solucion", length = 10)
     @Temporal (TemporalType.DATE)
-    private String fechaSolucion = null;
+    private String fechaSolucion;
 
-    
-    public Incidente(long idIncidente, String tipoProblema, String descripcionProblema, long idTecnico, String fechaEstimadaSolucion, String estado) {
+    public IncidenteResuelto (long idIncidente, String tipoProblema, String descripcionProblema, long idTecnico, String fechaSolucion) {
         this.idIncidente = idIncidente;
         this.tipoProblema = tipoProblema;
         this.descripcionProblema = descripcionProblema;
@@ -46,16 +44,13 @@ public class Incidente {
         //En caso de que la fecha ingresada no sea valida, se ocupara un valor predeterminado de una semana
         //Es decir la fecha de solucion estimada sera una semana despues de haber registrado el incidente
         try{
-            this.fechaEstimadaSolucion=fechaEstimadaSolucion;   
+            this.fechaSolucion=fechaSolucion;   
         }catch(Exception e){
-            this.fechaEstimadaSolucion=LocalDate.now().plusDays(7L).format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+            this.fechaSolucion = null;
         }
     }
 
-    public Incidente() {
+    public IncidenteResuelto () {
     }
-
-    
-    
     
 }

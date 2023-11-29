@@ -34,7 +34,7 @@ public class IncidenteController {
     @PostMapping (value = "/reportes-incidentes/incidentes/agregar", headers="Accept=application/json")
     public String agregarIncidente (@RequestBody Incidente incidente){
         this.incidente.agregarIncidente(incidente);
-        return "Cliente creado";
+        return "Incidente creado";
     }
     
     @GetMapping (value = "/reportes-incidentes/incidentes/{id}", headers="Accept=application/json")
