@@ -1,6 +1,7 @@
 package com.javaintermedio.api.reportesincidentes.service;
 
 import com.javaintermedio.api.reportesincidentes.model.EmpleadoComercial;
+import com.javaintermedio.api.reportesincidentes.model.Usuario;
 import com.javaintermedio.api.reportesincidentes.repository.EmpleadoComercialRepository;
 import java.util.List;
 import java.util.Optional;
@@ -13,9 +14,16 @@ public class EmpleadoComercialService {
     @Autowired
     private EmpleadoComercialRepository empleadoComercialRepo;
     
+    @Autowired
+    private UsuarioService usuarioService;
+    
     //Crud basico
     public void agregarEmpleadoComercial(EmpleadoComercial empleado){
-        empleadoComercialRepo.save(empleado);
+        String password = empleado.getNombre() + empleado.getDni();
+        
+        this.empleadoComercialRepo.save(empleado);
+        
+        this.usuarioService.cargarUsuario(new Usuario (empleado.getIdEmpleadoComercial(), empleado.getEmail(), password));
     }
     
     public void eliminarEmpleadoComercial(long id){
@@ -33,6 +41,10 @@ public class EmpleadoComercialService {
     public void modificarEmpleadoComercial(long id, EmpleadoComercial empleado){
         
         EmpleadoComercial empleadoAux = this.empleadoComercialRepo.findById(id).orElse(empleado);
+        
+        if ( !empleado.getEmail().equals(empleadoAux.getEmail()) ){
+            this.usuarioService.modificarEmail(empleado.getIdEmpleadoComercial(), empleado.getEmail());
+        }
         
         empleadoAux.setDni(empleado.getDni());
         empleadoAux.setNombre(empleado.getNombre());

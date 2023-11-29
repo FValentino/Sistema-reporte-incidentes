@@ -1,7 +1,9 @@
 package com.javaintermedio.api.reportesincidentes.controller;
 
 import com.javaintermedio.api.reportesincidentes.model.EmpleadoTecnico;
+import com.javaintermedio.api.reportesincidentes.model.Usuario;
 import com.javaintermedio.api.reportesincidentes.service.EmpleadoTecnicoService;
+import com.javaintermedio.api.reportesincidentes.service.UsuarioService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class EmpleadoTecnicoController {
     
     private EmpleadoTecnicoService empelado;
+    private UsuarioService usuario;
     
     @Autowired
-    public EmpleadoTecnicoController(EmpleadoTecnicoService empleado){
+    public EmpleadoTecnicoController(EmpleadoTecnicoService empleado, UsuarioService usuario){
         this.empelado = empleado;
+        this.usuario = usuario;
     }
     
     //CRUD BASICO
@@ -50,5 +54,10 @@ public class EmpleadoTecnicoController {
     @PutMapping (value = "/reportes-incidentes/empleados/tecnico/actualizar/{id}", headers="Accept=application/json")
     public void modificarEmpleado (@PathVariable long id, @RequestBody EmpleadoTecnico empelado){
         this.empelado.modificarEmpleadoTecnico(id, empelado);
+    }
+    
+    @PutMapping (value = "/reportes-incidentes/empleados/tecnico/actualizar/contraseña/{id}", headers="Accept=application/json")
+    public void modificarPassword (@PathVariable long id, @RequestBody Usuario usuario){
+        this.usuario.modificarPassword(id, usuario.getPassword());
     }
 }
