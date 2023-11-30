@@ -38,8 +38,21 @@ public class Incidente {
     private String fechaSolucion = null;
 
     
-    public Incidente(long idIncidente, String tipoProblema, String descripcionProblema, long idTecnico, String fechaEstimadaSolucion, String estado) {
+    public Incidente(long idIncidente, String tipoProblema, String descripcionProblema, long idTecnico, String fechaEstimadaSolucion) {
         this.idIncidente = idIncidente;
+        this.tipoProblema = tipoProblema;
+        this.descripcionProblema = descripcionProblema;
+        this.idTecnico = idTecnico;
+        //En caso de que la fecha ingresada no sea valida, se ocupara un valor predeterminado de una semana
+        //Es decir la fecha de solucion estimada sera una semana despues de haber registrado el incidente
+        try{
+            this.fechaEstimadaSolucion=fechaEstimadaSolucion;   
+        }catch(Exception e){
+            this.fechaEstimadaSolucion=LocalDate.now().plusDays(7L).format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        }
+    }
+    
+    public Incidente(String tipoProblema, String descripcionProblema, long idTecnico, String fechaEstimadaSolucion) {
         this.tipoProblema = tipoProblema;
         this.descripcionProblema = descripcionProblema;
         this.idTecnico = idTecnico;

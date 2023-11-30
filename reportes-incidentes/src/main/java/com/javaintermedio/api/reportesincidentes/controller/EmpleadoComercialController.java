@@ -19,14 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class EmpleadoComercialController {
 
+    @Autowired
     private EmpleadoComercialService empeladoService;
+    @Autowired
     private UsuarioService usuarioServico;
     
-    @Autowired
-    public EmpleadoComercialController(EmpleadoComercialService empleado, UsuarioService usuario){
-        this.empeladoService = empleado;
-        this.usuarioServico = usuario;
-    }
+    
     
     //CRUD BASICO
     @GetMapping (value = "/reportes-incidentes/empleados/comercial", headers="Accept=application/json")
@@ -43,7 +41,7 @@ public class EmpleadoComercialController {
     @GetMapping (value = "/reportes-incidentes/empleados/comercial/{id}", headers="Accept=application/json")
     @ResponseBody
     public Optional<EmpleadoComercial> buscarEmpleado(@PathVariable long id){
-        return this.empeladoService.buscarEmpleadoComercial(id);
+        return this.empeladoService.buscarEmpleadoComercialById(id);
     }
     
     @DeleteMapping (value = "/reportes-incidentes/empleados/comercial/eliminar/{id}", headers="Accept=application/json")

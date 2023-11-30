@@ -26,8 +26,8 @@ public class EmpleadoTecnico{
     private String telefono;
     private String especialidad;
 
-    public EmpleadoTecnico(long idEmpleadoTecnico, int dni, String nombre, String email, String telefono, String especialidad) {
-        this.idEmpleadoTecnico = idEmpleadoTecnico;
+   
+    public EmpleadoTecnico(int dni, String nombre, String email, String telefono, String especialidad) {
         this.dni = dni;
         this.nombre = nombre;
         this.email = email;

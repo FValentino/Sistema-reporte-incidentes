@@ -30,9 +30,10 @@ public class EmpleadoComercialService {
         empleadoComercialRepo.deleteById(id);
     }
     
-    public Optional<EmpleadoComercial> buscarEmpleadoComercial(long id){
+    public Optional<EmpleadoComercial> buscarEmpleadoComercialById(long id){
         return empleadoComercialRepo.findById(id);
     }
+    
     
     public List <EmpleadoComercial> mostrarTodos(){
         return empleadoComercialRepo.findAll();

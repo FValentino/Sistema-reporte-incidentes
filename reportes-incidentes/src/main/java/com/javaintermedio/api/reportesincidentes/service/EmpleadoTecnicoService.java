@@ -1,6 +1,5 @@
 package com.javaintermedio.api.reportesincidentes.service;
 
-import com.javaintermedio.api.reportesincidentes.model.EmpleadoMesaAyuda;
 import com.javaintermedio.api.reportesincidentes.model.EmpleadoTecnico;
 import com.javaintermedio.api.reportesincidentes.repository.EmpleadoTecnicoRepository;
 import java.util.List;

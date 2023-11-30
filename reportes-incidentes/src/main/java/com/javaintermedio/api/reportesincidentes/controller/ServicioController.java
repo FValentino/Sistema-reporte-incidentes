@@ -17,12 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ServicioController {
     
+    @Autowired
     private ServicioService servicio;
     
-    @Autowired
-    public ServicioController(ServicioService servicio){
-        this.servicio = servicio;
-    }
     
     //CRUD BASICO
     @GetMapping (value = "/reportes-incidentes/servicios", headers = "Accept = application/json")

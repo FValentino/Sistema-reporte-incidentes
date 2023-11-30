@@ -19,14 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class EmpleadoMesaAyudaController {
     
-    private EmpleadoMesaAyudaService empelado;
-    private UsuarioService usuario;
-    
     @Autowired
-    public EmpleadoMesaAyudaController(EmpleadoMesaAyudaService empleado, UsuarioService usuario){
-        this.empelado = empleado;
-        this.usuario = usuario;
-    }
+    private EmpleadoMesaAyudaService empelado;
+    @Autowired
+    private UsuarioService usuario;
     
     //CRUD BASICO
     @GetMapping (value = "/reportes-incidentes/empleados/mesa-ayuda", headers="Accept=application/json")

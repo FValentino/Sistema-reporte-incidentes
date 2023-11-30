@@ -17,12 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class IncidenteController {
     
-    private IncidenteService incidente;
-    
     @Autowired
-    public IncidenteController(IncidenteService incidente){
-        this.incidente = incidente;
-    }
+    private IncidenteService incidente;
     
     //CRUD basico
     @GetMapping(value = "/reportes-incidentes/incidentes", headers="Accept=application/json") 

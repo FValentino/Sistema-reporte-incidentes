@@ -23,6 +23,10 @@ public class Servicio {
         this.idServicio = idServicio;
         this.nombre = nombre;
     }
+    
+    public Servicio(String nombre) {
+        this.nombre = nombre;
+    }
 
     public Servicio() {
     }

@@ -22,8 +22,8 @@ public class UsuarioService {
         this.usuarioRepo.save(usuario);
     }
     
-    public Optional<Usuario> buscarUsuario(long id){
-        return this.usuarioRepo.findById(id);
+    public Usuario findByEmail(String email){
+        return this.usuarioRepo.findByEmail(email);
     }
     
     public void eliminarUsuario(long id){

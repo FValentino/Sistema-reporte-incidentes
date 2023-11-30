@@ -19,14 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class EmpleadoRecursosHumanosController {
     
+    @Autowired
     private EmpleadoRecursosHumanosService empelado;
+    @Autowired
     private UsuarioService usuario;
     
-    @Autowired
-    public EmpleadoRecursosHumanosController(EmpleadoRecursosHumanosService empleado, UsuarioService usuario){
-        this.empelado = empleado;
-        this.usuario = usuario;
-    }
     
     //CRUD BASICO
     @GetMapping (value = "/reportes-incidentes/empleados/recursos-humanos", headers="Accept=application/json")
