@@ -1,6 +1,7 @@
 package com.javaintermedio.api.reportesincidentes.service;
 
 import com.javaintermedio.api.reportesincidentes.model.EmpleadoTecnico;
+import com.javaintermedio.api.reportesincidentes.model.Usuario;
 import com.javaintermedio.api.reportesincidentes.repository.EmpleadoTecnicoRepository;
 import java.util.List;
 import java.util.Optional;
@@ -13,21 +14,27 @@ public class EmpleadoTecnicoService {
     @Autowired
     private EmpleadoTecnicoRepository empleadoTecnicoRepo;
     
+    @Autowired
+    private UsuarioService usuarioService;
+    
     //Crud basico
     public void agregarEmpleadoTecnico(EmpleadoTecnico empleado){
-        empleadoTecnicoRepo.save(empleado);
+        String password = empleado.getNombre() + "-" + empleado.getDni();
+        
+        this.empleadoTecnicoRepo.save(empleado);
+        this.usuarioService.cargarUsuario(new Usuario (empleado.getIdEmpleadoComercial(), empleado.getEmail(), password));
     }
     
     public void eliminarEmpleadoTecnico(long id){
-        empleadoTecnicoRepo.deleteById(id);
+        this.empleadoTecnicoRepo.deleteById(id);
     }
     
     public Optional<EmpleadoTecnico> buscarEmpleadoTecnico(long id){
-        return empleadoTecnicoRepo.findById(id);
+        return this.empleadoTecnicoRepo.findById(id);
     }
     
     public List <EmpleadoTecnico> mostrarTodos(){
-        return empleadoTecnicoRepo.findAll();
+        return this.empleadoTecnicoRepo.findAll();
     }
     
     public void modificarEmpleadoTecnico(long id, EmpleadoTecnico empleado){
@@ -39,6 +46,6 @@ public class EmpleadoTecnicoService {
         empleadoAux.setEmail(empleado.getEmail());
         empleadoAux.setTelefono(empleado.getTelefono());
         
-        empleadoTecnicoRepo.save(empleado);
+        this.empleadoTecnicoRepo.save(empleado);
     }
 }

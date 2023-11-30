@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/reportes-incidentes")
 public class EmpleadoMesaAyudaController {
     
     @Autowired
@@ -25,29 +27,29 @@ public class EmpleadoMesaAyudaController {
     private UsuarioService usuario;
     
     //CRUD BASICO
-    @GetMapping (value = "/reportes-incidentes/empleados/mesa-ayuda", headers="Accept=application/json")
+    @GetMapping (value = "/empleados/mesa-ayuda", headers="Accept=application/json")
     @ResponseBody
     public List <EmpleadoMesaAyuda> mostrarTodos(){
         return this.empelado.mostrarTodos();
     }
     
-    @PostMapping (value = "/reportes-incidentes/empleados/mesa-ayuda/agregar", headers="Accept=application/json")
+    @PostMapping (value = "/empleados/mesa-ayuda/agregar", headers="Accept=application/json")
     public void agregarEmpleado(@RequestBody EmpleadoMesaAyuda empleado){
         this.empelado.agregarEmpleadoMesaAyuda(empleado);
     }
     
-    @GetMapping (value = "/reportes-incidentes/empleados/mesa-ayuda/{id}", headers="Accept=application/json")
+    @GetMapping (value = "/empleados/mesa-ayuda/{id}", headers="Accept=application/json")
     @ResponseBody
     public Optional<EmpleadoMesaAyuda> buscarEmpleado(@PathVariable long id){
         return this.empelado.buscarEmpleadoMesaAyuda(id);
     }
     
-    @DeleteMapping (value = "/reportes-incidentes/empleados/mesa-ayuda/eliminar/{id}", headers="Accept=application/json")
+    @DeleteMapping (value = "/empleados/mesa-ayuda/eliminar/{id}", headers="Accept=application/json")
     public void eliminarEmpleado (@PathVariable long id){
         this.empelado.eliminarEmpleadoMesaAyuda(id);
     }
     
-    @PutMapping (value = "/reportes-incidentes/empleados/mesa-ayuda/actualizar/{id}", headers="Accept=application/json")
+    @PutMapping (value = "/empleados/mesa-ayuda/actualizar/{id}", headers="Accept=application/json")
     public void modificarEmpleado (@PathVariable long id, @RequestBody EmpleadoMesaAyuda empelado){
         this.empelado.modificarEmpleadoMesaAyuda(id, empelado);
     }

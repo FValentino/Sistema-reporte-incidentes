@@ -19,7 +19,7 @@ public class EmpleadoComercialService {
     
     //Crud basico
     public void agregarEmpleadoComercial(EmpleadoComercial empleado){
-        String password = empleado.getNombre() + empleado.getDni();
+        String password = empleado.getNombre() + "-" + empleado.getDni();
         
         this.empleadoComercialRepo.save(empleado);
         

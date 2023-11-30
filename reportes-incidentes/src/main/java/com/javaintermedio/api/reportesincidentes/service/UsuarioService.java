@@ -17,6 +17,10 @@ public class UsuarioService {
     public List <Usuario> mostrarTodos(){
         return this.usuarioRepo.findAll();
     }
+
+    public Optional<Usuario> buscarUsuario(long id) {
+        return this.usuarioRepo.findById(id);
+    }    
     
     public void cargarUsuario(Usuario usuario){
         this.usuarioRepo.save(usuario);
