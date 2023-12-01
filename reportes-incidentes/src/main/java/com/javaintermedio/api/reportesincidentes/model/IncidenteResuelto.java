@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,15 +21,17 @@ public class IncidenteResuelto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_incidente", nullable = false)
     private long idIncidente;
-    @Column(name = "tipo_problema", nullable = false, length = 50)
-    private String tipoProblema;
+    @Column(name="id_cliente", nullable = false)
+    private long idCliente;
+    @Column(name = "id_servicio", nullable = false, length = 50)
+    private long idServicio;
     @Column(name = "descripcion_problema", nullable = false, length = 150)
     private String descripcionProblema;
     @Column(name = "id_tecnico", nullable = false)
     private long idTecnico;
-    @Column(name = "fecha_registro", updatable=false ,nullable = false, length = 10)
+    @Column(name = "fecha_registro", nullable=false, updatable=false)
     @Temporal(TemporalType.DATE)
-    private String fechaRegistro;
+    private String fechaRegistro = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     @Column(name = "fecha_estimada_solucion", nullable = false, length = 10)
     @Temporal (TemporalType.DATE)
     private String fechaEstimadaSolucion;
@@ -36,9 +39,9 @@ public class IncidenteResuelto {
     @Temporal (TemporalType.DATE)
     private String fechaSolucion;
 
-    public IncidenteResuelto (long idIncidente, String tipoProblema, String descripcionProblema, long idTecnico, String fechaSolucion) {
-        this.idIncidente = idIncidente;
-        this.tipoProblema = tipoProblema;
+    public IncidenteResuelto (long idCliente, long idServicio, String descripcionProblema, long idTecnico, String fechaSolucion) {
+        this.idCliente = idCliente;
+        this.idServicio = idServicio;
         this.descripcionProblema = descripcionProblema;
         this.idTecnico = idTecnico;
         //En caso de que la fecha ingresada no sea valida, se ocupara un valor predeterminado de una semana

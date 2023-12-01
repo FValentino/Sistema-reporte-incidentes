@@ -21,8 +21,10 @@ public class Incidente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_incidente", nullable = false)
     private long idIncidente;
-    @Column(name = "tipo_problema", nullable = false, length = 50)
-    private String tipoProblema;
+    @Column(name="id_cliente", nullable = false)
+    private long idCliente;
+    @Column(name = "id_servicio", nullable = false, length = 50)
+    private long idServicio;
     @Column(name = "descripcion_problema", nullable = false, length = 150)
     private String descripcionProblema;
     @Column(name = "id_tecnico", nullable = false)
@@ -36,28 +38,14 @@ public class Incidente {
     @Column (name = "fecha_solucion", length = 10)
     @Temporal (TemporalType.DATE)
     private String fechaSolucion = null;
-
     
-    public Incidente(long idIncidente, String tipoProblema, String descripcionProblema, long idTecnico, String fechaEstimadaSolucion) {
-        this.idIncidente = idIncidente;
-        this.tipoProblema = tipoProblema;
+    public Incidente(long idCliente, long idServicio, String descripcionProblema, long idTecnico, String fechaEstimadaSolucion) {
+        this.idCliente = idCliente;
+        this.idServicio = idServicio;
         this.descripcionProblema = descripcionProblema;
         this.idTecnico = idTecnico;
         //En caso de que la fecha ingresada no sea valida, se ocupara un valor predeterminado de una semana
-        //Es decir la fecha de solucion estimada sera una semana despues de haber registrado el incidente
-        try{
-            this.fechaEstimadaSolucion=fechaEstimadaSolucion;   
-        }catch(Exception e){
-            this.fechaEstimadaSolucion=LocalDate.now().plusDays(7L).format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        }
-    }
-    
-    public Incidente(String tipoProblema, String descripcionProblema, long idTecnico, String fechaEstimadaSolucion) {
-        this.tipoProblema = tipoProblema;
-        this.descripcionProblema = descripcionProblema;
-        this.idTecnico = idTecnico;
-        //En caso de que la fecha ingresada no sea valida, se ocupara un valor predeterminado de una semana
-        //Es decir la fecha de solucion estimada sera una semana despues de haber registrado el incidente
+        //Es decir la fecha de solucion estimada sera una semana despues de haber registrado el incidenteg
         try{
             this.fechaEstimadaSolucion=fechaEstimadaSolucion;   
         }catch(Exception e){

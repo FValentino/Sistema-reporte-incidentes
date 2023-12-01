@@ -14,5 +14,8 @@ public class EmpleadoComercial extends Empleado{
     public EmpleadoComercial(int dni, String nombre, String email, String telefono) {
         super(dni, nombre, email, telefono);
     }
+
+    public EmpleadoComercial() {
+    }
     
 }

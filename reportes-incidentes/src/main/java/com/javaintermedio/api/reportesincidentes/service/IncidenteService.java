@@ -40,7 +40,6 @@ public class IncidenteService {
         if (Objects.nonNull(incidente.getFechaSolucion())){
             IncidenteResuelto incidenteResuelto = new IncidenteResuelto();
             
-            incidenteResuelto.setTipoProblema(incidente.getTipoProblema());
             incidenteResuelto.setDescripcionProblema(incidente.getDescripcionProblema());
             incidenteResuelto.setIdTecnico(incidente.getIdTecnico());
             incidenteResuelto.setFechaRegistro(incidente.getFechaRegistro());
@@ -53,7 +52,6 @@ public class IncidenteService {
         else{
             Incidente incidenteAux = this.incidenteRepo.findById(id).orElse(null);
             
-            incidenteAux.setTipoProblema(incidente.getTipoProblema());
             incidenteAux.setDescripcionProblema(incidente.getDescripcionProblema());
             incidenteAux.setIdTecnico(incidente.getIdTecnico());
             incidenteAux.setFechaRegistro(incidente.getFechaRegistro());

@@ -30,9 +30,8 @@ public class ServicioController {
     }
     
     @PostMapping (value = "/servicios/agregar", headers="Accept=application/json")
-    public String agregarServicio (@RequestBody Servicio servicio){
+    public void agregarServicio (@RequestBody Servicio servicio){
         this.servicio.agregarServicio(servicio);
-        return "Cliente creado";
     }
     
     @GetMapping (value = "/servicios/{id}", headers="Accept=application/json")

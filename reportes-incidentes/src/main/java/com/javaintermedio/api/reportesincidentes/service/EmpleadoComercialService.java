@@ -23,7 +23,7 @@ public class EmpleadoComercialService {
         
         this.empleadoComercialRepo.save(empleado);
         
-        this.usuarioService.cargarUsuario(new Usuario (empleado.getIdEmpleadoComercial(), empleado.getEmail(), password));
+        this.usuarioService.cargarUsuario(new Usuario (empleado.getIdEmpleado(), empleado.getEmail(), password));
     }
     
     public void eliminarEmpleadoComercial(long id){
@@ -44,7 +44,7 @@ public class EmpleadoComercialService {
         EmpleadoComercial empleadoAux = this.empleadoComercialRepo.findById(id).orElse(empleado);
         
         if ( !empleado.getEmail().equals(empleadoAux.getEmail()) ){
-            this.usuarioService.modificarEmail(empleado.getIdEmpleadoComercial(), empleado.getEmail());
+            this.usuarioService.modificarEmail(empleado.getIdEmpleado(), empleado.getEmail());
         }
         
         empleadoAux.setDni(empleado.getDni());

@@ -19,6 +19,12 @@ public class EmpleadoTecnico extends Empleado{
     public EmpleadoTecnico(int dni, String nombre, String email, String telefono, String especialidad) {
         super(dni, nombre, email, telefono);
         this.especialidad = especialidad;
+    } 
+
+
+    public EmpleadoTecnico() {
     }
+    
+    
     
 }

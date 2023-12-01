@@ -22,7 +22,7 @@ public class EmpleadoRecursosHumanosService {
         String password = empleado.getNombre() + "-" + empleado.getDni();
         
         this.empleadoRecursosHumanosRepo.save(empleado);
-        this.usuarioService.cargarUsuario(new Usuario (empleado.getIdEmpleadoComercial(), empleado.getEmail(), password));
+        this.usuarioService.cargarUsuario(new Usuario (empleado.getIdEmpleado(), empleado.getEmail(), password));
     }
     
     public void eliminarEmpleadoRecursosHumanos(long id){
