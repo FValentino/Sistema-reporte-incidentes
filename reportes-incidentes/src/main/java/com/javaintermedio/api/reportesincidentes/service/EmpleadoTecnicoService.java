@@ -41,6 +41,10 @@ public class EmpleadoTecnicoService {
         
         EmpleadoTecnico empleadoAux = this.empleadoTecnicoRepo.findById(id).orElse(empleado);
         
+        if ( !empleado.getEmail().equals(empleadoAux.getEmail()) ){
+            this.usuarioService.modificarEmail(empleado.getIdEmpleado(), empleado.getEmail());
+        }
+        
         empleadoAux.setDni(empleado.getDni());
         empleadoAux.setNombre(empleado.getNombre());
         empleadoAux.setEmail(empleado.getEmail());

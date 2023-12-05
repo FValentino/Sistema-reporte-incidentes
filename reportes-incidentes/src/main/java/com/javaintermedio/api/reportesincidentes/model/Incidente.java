@@ -31,10 +31,10 @@ public class Incidente {
     private long idTecnico;
     @Column(name = "fecha_registro", nullable=false, updatable=false)
     @Temporal(TemporalType.DATE)
-    private String fechaRegistro = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+    private LocalDate fechaRegistro = LocalDate.now();
     @Column(name = "fecha_estimada_solucion", nullable = false, length = 10)
     @Temporal (TemporalType.DATE)
-    private String fechaEstimadaSolucion;
+    private LocalDate fechaEstimadaSolucion;
     @Column (name = "fecha_solucion", length = 10)
     @Temporal (TemporalType.DATE)
     private String fechaSolucion = null;
@@ -45,11 +45,16 @@ public class Incidente {
         this.descripcionProblema = descripcionProblema;
         this.idTecnico = idTecnico;
         //En caso de que la fecha ingresada no sea valida, se ocupara un valor predeterminado de una semana
-        //Es decir la fecha de solucion estimada sera una semana despues de haber registrado el incidenteg
+        //Es decir la fecha de solucion estimada sera una semana despues de haber registrado el incidente
         try{
-            this.fechaEstimadaSolucion=fechaEstimadaSolucion;   
+            //Si la fecha estimada de solucion es mayor a la fecha delr egistro, es aceptada
+            if ( this.fechaRegistro.compareTo(LocalDate.parse(fechaEstimadaSolucion)) <= 0){
+                this.fechaEstimadaSolucion = LocalDate.parse(fechaEstimadaSolucion);
+            } else{ //Si la fecha es menor, se toma como fecha de solucion 7 dias despues
+                this.fechaEstimadaSolucion = this.fechaRegistro.plusDays(7L);
+            }  
         }catch(Exception e){
-            this.fechaEstimadaSolucion=LocalDate.now().plusDays(7L).format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+            this.fechaEstimadaSolucion=this.fechaRegistro.plusDays(7L);
         }
     }
 

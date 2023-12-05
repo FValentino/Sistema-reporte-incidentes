@@ -39,10 +39,11 @@ public class EmpleadoComercialService {
         return empleadoComercialRepo.findAll();
     }
     
+    @SuppressWarnings("empty-statement")
     public void modificarEmpleadoComercial(long id, EmpleadoComercial empleado){
         
         EmpleadoComercial empleadoAux = this.empleadoComercialRepo.findById(id).orElse(empleado);
-        
+                
         if ( !empleado.getEmail().equals(empleadoAux.getEmail()) ){
             this.usuarioService.modificarEmail(empleado.getIdEmpleado(), empleado.getEmail());
         }

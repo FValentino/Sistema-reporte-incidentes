@@ -18,7 +18,6 @@ import lombok.Setter;
 public class IncidenteResuelto {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_incidente", nullable = false)
     private long idIncidente;
     @Column(name="id_cliente", nullable = false)
@@ -39,7 +38,8 @@ public class IncidenteResuelto {
     @Temporal (TemporalType.DATE)
     private String fechaSolucion;
 
-    public IncidenteResuelto (long idCliente, long idServicio, String descripcionProblema, long idTecnico, String fechaSolucion) {
+    public IncidenteResuelto (long idIncidente, long idCliente, long idServicio, String descripcionProblema, long idTecnico, String fechaSolucion) {
+        this.idIncidente = idIncidente;
         this.idCliente = idCliente;
         this.idServicio = idServicio;
         this.descripcionProblema = descripcionProblema;

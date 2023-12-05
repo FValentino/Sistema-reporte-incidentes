@@ -1,6 +1,7 @@
 package com.javaintermedio.api.reportesincidentes.service;
 
 import com.javaintermedio.api.reportesincidentes.model.IncidenteResuelto;
+import com.javaintermedio.api.reportesincidentes.repository.IncidenteRepository;
 import java.util.List;
 import java.util.Optional;
 import com.javaintermedio.api.reportesincidentes.repository.IncidenteResueltoRepository;
@@ -13,9 +14,13 @@ class IncidentesResueltosService {
     @Autowired
     private IncidenteResueltoRepository incidenteResueltoRepo;
     
+    @Autowired
+    private IncidenteService incidenteService;
+    
     //Crud basico
     public void agregarIncidente(IncidenteResuelto incidente){
         incidenteResueltoRepo.save(incidente);
+        this.incidenteService.eliminarIncidente(incidente.getIdIncidente());
     }
     
     public void eliminarIncidente(long id){

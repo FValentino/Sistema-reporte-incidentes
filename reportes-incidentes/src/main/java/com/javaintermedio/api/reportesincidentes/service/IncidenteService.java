@@ -40,10 +40,11 @@ public class IncidenteService {
         if (Objects.nonNull(incidente.getFechaSolucion())){
             IncidenteResuelto incidenteResuelto = new IncidenteResuelto();
             
+            incidenteResuelto.setIdIncidente(id);
             incidenteResuelto.setDescripcionProblema(incidente.getDescripcionProblema());
             incidenteResuelto.setIdTecnico(incidente.getIdTecnico());
-            incidenteResuelto.setFechaRegistro(incidente.getFechaRegistro());
-            incidenteResuelto.setFechaEstimadaSolucion(incidente.getFechaEstimadaSolucion());
+            incidenteResuelto.setFechaRegistro(incidente.getFechaRegistro().toString());
+            incidenteResuelto.setFechaEstimadaSolucion(incidente.getFechaEstimadaSolucion().toString());
             incidenteResuelto.setFechaSolucion(incidente.getFechaSolucion());
             
             this.incidenteRepo.deleteById(id);
